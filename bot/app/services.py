@@ -1,110 +1,99 @@
+import requests
 import os
 from dotenv import load_dotenv
 import httpx
 
 load_dotenv()
-BASE_URL = "http://" + (os.getenv("SERVICE_ROOT") or "lmao")
+BASE_URL = (os.getenv("SERVICE_ROOT") or "lmao")
+
+
+print(BASE_URL)
+
 
 # -------------------- Resources --------------------
 
 
-async def get_resources():
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f"{BASE_URL}/resources/")
-        return response.json()
+def get_resources():
+    response = requests.get(f"{BASE_URL}/resources/")
+    return response.json()
 
 
-async def create_resource(data):
-    async with httpx.AsyncClient() as client:
-        response = await client.post(f"{BASE_URL}/resources/", json=data)
-        return response.json()
+def create_resource(data):
+    response = requests.post(f"{BASE_URL}/resources/", json=data)
+    return response.json()
 
 
-async def get_resource(resource_id):
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f"{BASE_URL}/resources/{resource_id}")
-        return response.json()
+def get_resource(resource_id):
+    response = requests.get(f"{BASE_URL}/resources/{resource_id}")
+    return response.json()
 
 
-async def update_resource(resource_id, data):
-    async with httpx.AsyncClient() as client:
-        response = await client.patch(f"{BASE_URL}/resources/{resource_id}", json=data)
-        return response.json()
+def update_resource(resource_id, data):
+    response = requests.patch(f"{BASE_URL}/resources/{resource_id}", json=data)
+    return response.json()
 
 
-async def delete_resource(resource_id):
-    async with httpx.AsyncClient() as client:
-        response = await client.delete(f"{BASE_URL}/resources/{resource_id}")
-        return response.json()
+def delete_resource(resource_id):
+    response = requests.delete(f"{BASE_URL}/resources/{resource_id}")
+    return response.json()
 
 # -------------------- Users --------------------
 
 
-async def get_users():
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f"{BASE_URL}/users/")
-        return response.json()
+def get_users():
+    response = requests.get(f"{BASE_URL}/users/")
+    return response.json()
 
 
-async def create_user(data):
-    async with httpx.AsyncClient() as client:
-        response = await client.post(f"{BASE_URL}/users/", json=data)
-        return response.json()
+def create_user(data):
+    response = requests.post(f"{BASE_URL}/users/", json=data)
+    return response.json()
 
 
-async def get_user(user_id):
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f"{BASE_URL}/users/{user_id}")
-        return response.json()
+def get_user(user_id):
+    response = requests.get(f"{BASE_URL}/users/{user_id}")
+    return response.json()
 
 
-async def update_user(user_id, data):
-    async with httpx.AsyncClient() as client:
-        response = await client.patch(f"{BASE_URL}/users/{user_id}", json=data)
-        return response.json()
+def update_user(user_id, data):
+    response = requests.patch(f"{BASE_URL}/users/{user_id}", json=data)
+    return response.json()
 
 
-async def delete_user(user_id):
-    async with httpx.AsyncClient() as client:
-        response = await client.delete(f"{BASE_URL}/users/{user_id}")
-        return response.json()
+def delete_user(user_id):
+    response = requests.delete(f"{BASE_URL}/users/{user_id}")
+    return response.json()
 
 # -------------------- Chats --------------------
 
 
-async def get_chats():
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f"{BASE_URL}/chats/")
-        return response.json()
+def get_chats():
+    response = requests.get(f"{BASE_URL}/chats/")
+    return response.json()
 
 
-async def create_chat(data):
-    async with httpx.AsyncClient() as client:
-        response = await client.post(f"{BASE_URL}/chats/", json=data)
-        return response.json()
+def create_chat(data):
+    response = requests.post(f"{BASE_URL}/chats/", json=data)
+    return response.json()
 
 
-async def get_chat(thread_id):
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f"{BASE_URL}/chats/{thread_id}")
-        return response.json()
+def get_chat(thread_id):
+    response = requests.get(f"{BASE_URL}/chats/{thread_id}")
+    return response.json()
 
 
-async def update_chat(thread_id, data):
-    async with httpx.AsyncClient() as client:
-        response = await client.patch(f"{BASE_URL}/chats/{thread_id}", json=data)
-        return response.json()
+def update_chat(thread_id, data):
+    response = requests.patch(f"{BASE_URL}/chats/{thread_id}", json=data)
+    return response.json()
 
 
-async def delete_chat(thread_id):
-    async with httpx.AsyncClient() as client:
-        response = await client.delete(f"{BASE_URL}/chats/{thread_id}")
-        return response.json()
+def delete_chat(thread_id):
+    response = requests.delete(f"{BASE_URL}/chats/{thread_id}")
+    return response.json()
 
 # -------------------- Home --------------------
 
 
-async def get_home():
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f"{BASE_URL}/")
-        return response.json()
+def get_home():
+    response = requests.get(f"{BASE_URL}/")
+    return response.json()
