@@ -19,6 +19,6 @@ async def create_message(message: MessageCreate, session: SessionDep):
 
 
 @router.get("/", response_model=list[Message])
-async def get_messages(chat_id: str, session: SessionDep):
-    statement = select(Message).where(Message.chat_id == chat_id)
+async def get_messages(session: SessionDep):
+    statement = select(Message)
     return session.exec(statement).all()
