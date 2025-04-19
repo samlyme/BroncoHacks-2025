@@ -4,7 +4,7 @@ from sqlmodel import select
 from app.db import SessionDep
 from app.models import Chat, ChatCreate
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter(prefix="/chats", tags=["Chats"])
 
 
 @router.post("/", response_model=Chat)
