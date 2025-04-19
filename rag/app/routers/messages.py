@@ -22,11 +22,3 @@ async def create_message(message: MessageCreate, session: SessionDep):
 async def get_messages(chat_id: str, session: SessionDep):
     statement = select(Message).where(Message.chat_id == chat_id)
     return session.exec(statement).all()
-
-
-@router.get("/", response_model=Message)
-async def get_message(message_id: str, session: SessionDep):
-    message = session.get(Message, message_id)
-    if not message:
-        raise HTTPException(status_code=404, detail="Message not found")
-    return message
