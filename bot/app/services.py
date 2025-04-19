@@ -91,6 +91,18 @@ def delete_chat(thread_id):
     response = requests.delete(f"{BASE_URL}/chats/{thread_id}")
     return response.json()
 
+
+# -------------------- Messages --------------------
+def get_messages_by_chat_id(chat_id):
+    response = requests.get(f"{BASE_URL}/messages/?chat_id={chat_id}")
+    return response.json()
+
+
+def create_message(data):
+    response = requests.post(f"{BASE_URL}/messages/", json=data)
+    return response.json()
+
+
 # -------------------- Home --------------------
 
 

@@ -61,15 +61,22 @@ async def on_message_create_in_thread(event: interactions.api.events.discord.Mes
         interactions.ChannelType.GUILD_PUBLIC_THREAD,
         interactions.ChannelType.GUILD_PRIVATE_THREAD
     ] and event.message.author.id != bot.user.id:  # Ignore the bot's own messages
+        message_channel = event.message.channel.id
         message_content = event.message.content
-        message_user = event.message.author
+        message_user = event.message.author.id
 
         # Log the message and user
         print(f"Message in thread: {message_content}")
         print(f"User who sent: {message_user}")
+        print(f"In thread: {message_channel}")
 
         # Respond to the message in the thread
-        await event.message.channel.send(f"Hello {message_user.username}, you said: {message_content}")
+        services.create_message({
+            "user_id": str(message_user),
+            "chat_id": str(message_channel),
+            "content": str(message_content)
+        })
+        await event.message.channel.send(f"Hello {message_user}, you said: {message_content}, in {message_channel}")
 
 load_dotenv()
 bot.start(os.getenv("DISCORD_TOKEN"))
