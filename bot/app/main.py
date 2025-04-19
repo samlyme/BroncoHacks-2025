@@ -50,7 +50,7 @@ async def create_private_thread(ctx: SlashContext, thread_name: str):
     await ctx.send(f"Private thread created: {thread.name}, {thread.id}", ephemeral=True)
 
     services.create_chat({
-        "thread_id": thread.id
+        "thread_id": str(thread.id)
     })
 
 
