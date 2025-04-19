@@ -26,7 +26,7 @@ async def read_chats(session: SessionDep):
 
 
 @router.get("/{thread_id}", response_model=Chat)
-async def read_chat(thread_id: int, session: SessionDep):
+async def read_chat(thread_id: str, session: SessionDep):
     chat = session.get(Chat, thread_id)
     if not chat:
         raise HTTPException(status_code=404, detail="Chat not found")
@@ -35,12 +35,12 @@ async def read_chat(thread_id: int, session: SessionDep):
 
 # not supported bc bot doesn't listen for it
 @router.patch("/{thread_id}", response_model=Chat)
-async def update_chat(thread_id: int, session: SessionDep):
+async def update_chat(thread_id: str, session: SessionDep):
     raise HTTPException(status_code=400, detail="Unsupported")
 
 
 @router.delete("/{thread_id}", response_model=Chat)
-async def delete_user(thread_id: int, session: SessionDep):
+async def delete_user(thread_id: str, session: SessionDep):
     chat = session.get(Chat, thread_id)
     if not chat:
         raise HTTPException(status_code=404, detail="Chat not found")

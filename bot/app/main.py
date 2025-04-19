@@ -19,14 +19,14 @@ async def on_ready():
 async def on_member_join(event: interactions.api.events.discord.MemberAdd):
     print(f"{event.member.id} has joined")
     services.create_user({
-        "discord_id": event.member.id
+        "discord_id": str(event.member.id)
     })
 
 
 @listen()
 async def on_member_leave(event: interactions.api.events.discord.MemberRemove):
     print(f"{event.member.id} has left")
-    services.delete_user(event.member.id)
+    services.delete_user(str(event.member.id))
 
 
 @slash_command(name="chat", description="Create a private thread with the bot")

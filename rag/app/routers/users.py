@@ -26,7 +26,7 @@ async def read_users(session: SessionDep):
 
 
 @router.get("/{user_id}", response_model=User)
-async def read_user(user_id: int, session: SessionDep):
+async def read_user(user_id: str, session: SessionDep):
     user = session.get(User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -34,12 +34,12 @@ async def read_user(user_id: int, session: SessionDep):
 
 
 @router.patch("/{user_id}", response_model=User)
-async def update_user(user_id: int, session: SessionDep):
+async def update_user(user_id: str, session: SessionDep):
     raise HTTPException(status_code=400, detail="Unsupported")
 
 
 @router.delete("/{user_id}", response_model=User)
-async def delete_user(user_id: int, session: SessionDep):
+async def delete_user(user_id: str, session: SessionDep):
     user = session.get(User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
