@@ -16,9 +16,16 @@ async def on_ready():
     print(f"This bot is owned by {bot.owner}")
 
 
-# Command to create a thread from the current channel
+@listen()
+async def on_member_join(event: interactions.api.events.discord.MemberAdd):
+    print(f"{event.member.id} has joined")
 
-# Command to create a private thread with the bot
+
+@listen()
+async def on_member_leave(event: interactions.api.events.discord.MemberRemove):
+    print(f"{event.member.id} has left")
+
+
 @slash_command(name="chat", description="Create a private thread with the bot")
 @slash_option(
     name="thread_name",
