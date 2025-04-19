@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Annotated
-from sqlmodel import Column, Field, SQLModel
+from sqlmodel import BigInteger, Column, Field, SQLModel
 from pgvector.sqlalchemy import Vector
 
 
@@ -28,7 +28,8 @@ class ResourceUpdate(ResourceBase):
 
 
 class UserBase(SQLModel):
-    discord_id: int | None = Field(default=None, primary_key=True)
+    discord_id: int | None = Field(
+        sa_column=Column(BigInteger(), primary_key=True))
 
 
 class User(UserBase, table=True):
@@ -40,7 +41,8 @@ class UserCreate(UserBase):
 
 
 class ChatBase(SQLModel):
-    thread_id: int | None = Field(default=None, primary_key=True)
+    thread_id: int | None = Field(
+        sa_column=Column(BigInteger(), primary_key=True))
 
 
 class Chat(ChatBase, table=True):

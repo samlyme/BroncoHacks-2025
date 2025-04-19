@@ -1,7 +1,6 @@
 import requests
 import os
 from dotenv import load_dotenv
-import httpx
 
 load_dotenv()
 BASE_URL = (os.getenv("SERVICE_ROOT") or "lmao")
@@ -74,6 +73,7 @@ def get_chats():
 
 def create_chat(data):
     response = requests.post(f"{BASE_URL}/chats/", json=data)
+    print(response.status_code)
     return response.json()
 
 
