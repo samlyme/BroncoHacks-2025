@@ -1,24 +1,7 @@
-from fastapi import APIRouter, HTTPException, Depends
-from sqlmodel import Column, Field, SQLModel, Session, select
-from pgvector.sqlalchemy import Vector
-from rag.db import SessionDep, get_session
-
-
-class Resource(SQLModel, table=True):
-    id: int = Field(default=None, primary_key=True)
-    name: str
-    file_path: str
-    label: str | None = None
-    type: str | None = None
-    upload_date: str | None = None
-    chunk_text: str
-    metadata: dict | None = None
-
-    # Custom SQLAlchemy column for vector
-    embedding: list[float] = Field(
-        sa_column=Column(Vector(1536))  # use pgvector Vector
-    )
-
+from fastapi import APIRouter, HTTPException
+from sqlmodel import select
+from rag.db import SessionDep
+from rag.models import Resource
 
 router = APIRouter(prefix="/resources", tags=["Resources"])
 
