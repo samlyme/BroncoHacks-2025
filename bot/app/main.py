@@ -64,6 +64,7 @@ async def on_message_create_in_thread(event: interactions.api.events.discord.Mes
         message_channel = event.message.channel.id
         message_content = event.message.content
         message_user = event.message.author.id
+        message_id = event.message.id
 
         # Log the message and user
         print(f"Message in thread: {message_content}")
@@ -72,6 +73,7 @@ async def on_message_create_in_thread(event: interactions.api.events.discord.Mes
 
         # Respond to the message in the thread
         services.create_message({
+            "message_id": str(message_id),
             "user_id": str(message_user),
             "chat_id": str(message_channel),
             "content": str(message_content)
