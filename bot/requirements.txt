@@ -1,3 +1,5 @@
 discord-py-interactions==5.14.0
 python-dotenv==1.0.1
 requests==2.32.3
+httpx==0.28.1
+httpx-sse==0.4.0

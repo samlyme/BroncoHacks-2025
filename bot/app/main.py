@@ -2,8 +2,7 @@ import os
 import interactions
 from interactions import Client, Intents, Permissions, listen, slash_command, SlashContext, OptionType, slash_default_member_permission, slash_option, Modal, ParagraphText, ShortText, User, Member, component_callback, modal_callback, ComponentContext, ComponentCommand, Button, ButtonStyle, integration_types, ModalContext
 from dotenv import load_dotenv
-import requests
-
+import app.services
 # Create a bot instance with the specified intents
 bot = Client(intents=Intents.GUILDS |
              Intents.GUILD_MEMBERS | Intents.GUILD_MESSAGES | Intents.MESSAGE_CONTENT)
