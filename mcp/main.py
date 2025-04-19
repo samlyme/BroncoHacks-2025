@@ -1,6 +1,5 @@
 import os
 import json
-from dotenv import load_dotenv
 import pandas as pd
 import re
 from anthropic import Anthropic
@@ -313,18 +312,3 @@ class SimpleMCPClient:
             "file_paths": file_paths,
             "index_path": index_path
         }
-
-
-load_dotenv()
-# Example usage
-if __name__ == "__main__":
-    api_key = os.environ.get("ANTHROPIC_API_KEY") or "your_api_key_here"
-    db_url = os.environ.get(
-        "DATABASE_URL") or "postgresql://username:password@localhost:5432/database_name"
-
-    client = SimpleMCPClient(api_key, db_url)
-    results = client.run(limit=500, days_back=30)
-
-    print("\nProcess complete!")
-    if "index_path" in results:
-        print(f"Study guides index available at: {results['index_path']}")
