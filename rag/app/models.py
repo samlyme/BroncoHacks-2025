@@ -51,15 +51,9 @@ class ChatCreate(ChatBase):
     pass
 
 
-class Role(str, Enum):
-    system = "system"
-    user = "user"
-    assistant = "assistant"
-
-
 class MessageBase(SQLModel):
     message_id: str = Field(primary_key=True)
-    role: Role = Field(default=Role.user)
+    role: str = Field(default="user")
     user_id: str = Field(foreign_key="user.discord_id")
     chat_id: str = Field(default=None, foreign_key="chat.thread_id")
     content: str
