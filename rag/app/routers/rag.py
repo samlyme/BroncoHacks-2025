@@ -3,4 +3,4 @@ from sqlmodel import select
 from app.db import SessionDep
 from app.models import Resource, ResourceCreate, ResourceUpdate
 
-router = APIRouter(prefix="/resources", tags=["Resources"])
+router = APIRouter(prefix="/rag", tags=["Rag"])

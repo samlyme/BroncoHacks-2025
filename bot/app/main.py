@@ -74,6 +74,7 @@ async def on_message_create_in_thread(event: interactions.api.events.discord.Mes
         # Respond to the message in the thread
         services.create_message({
             "message_id": str(message_id),
+            "role": "user",
             "user_id": str(message_user),
             "chat_id": str(message_channel),
             "content": str(message_content)

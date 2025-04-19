@@ -6,12 +6,14 @@ from app.db import create_db_and_tables
 from app.routers import resources, users
 from app.routers import chats
 from app.routers import messages
+from app.routers import rag
 
 app = FastAPI()
 app.include_router(resources.router)
 app.include_router(users.router)
 app.include_router(chats.router)
 app.include_router(messages.router)
+app.include_router(rag.router)
 
 
 @app.on_event("startup")
