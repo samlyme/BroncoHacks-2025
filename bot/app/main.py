@@ -8,12 +8,12 @@ import requests
 bot = Client(intents=Intents.GUILDS |
              Intents.GUILD_MEMBERS | Intents.GUILD_MESSAGES | Intents.MESSAGE_CONTENT)
 
+
 @listen()  # this decorator tells snek that it needs to listen for the corresponding event, and run this coroutine
 async def on_ready():
     # This event is called when the bot is ready to respond to commands
     print("Ready")
     print(f"This bot is owned by {bot.owner}")
-
 
 
 # Command to create a thread from the current channel
@@ -28,9 +28,9 @@ async def on_ready():
 )
 async def create_private_thread(ctx: SlashContext, thread_name: str):
     # Create a private thread in the current channel
-    thread = await ctx.channel.create_private_thread(
+    thread = await ctx.channel.create_private_thread(  # type: ignore
         name=thread_name,  # Name of the thread
-        auto_archive_duration=60  # Auto-archive duration in minutes
+        auto_archive_duration=60  # Auto-archive duration in minutes # type: ignore
     )
 
     # Add the user who created the thread to the thread
@@ -38,6 +38,7 @@ async def create_private_thread(ctx: SlashContext, thread_name: str):
 
     # Notify the user privately
     await ctx.send(f"Private thread created: {thread.name}", ephemeral=True)
+
 
 @listen()
 async def on_message_create_in_thread(event: interactions.api.events.discord.MessageCreate):
