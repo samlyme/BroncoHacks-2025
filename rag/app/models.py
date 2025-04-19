@@ -28,9 +28,7 @@ class ResourceUpdate(ResourceBase):
 
 
 class UserBase(SQLModel):
-    name: str
-    email: str
-    student_id: str
+    discord_id: int
 
 
 class User(UserBase, table=True):
@@ -43,6 +41,4 @@ class UserCreate(UserBase):
 
 
 class UserUpdate(UserBase):
-    name: str | None
-    email: str | None
-    student_id: str | None
+    discord_id: str | None
