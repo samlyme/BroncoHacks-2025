@@ -1,7 +1,7 @@
 fastapi==0.115.11
 fastapi-cli==0.0.7
 sqlmodel==0.0.24
-pgvector==0.4.0
+pgvector==0.3.6
 psycopg2-binary==2.9.10
 langchain==0.3.23
 langchain-anthropic==0.3.12
