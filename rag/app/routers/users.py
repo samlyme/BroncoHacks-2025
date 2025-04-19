@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException
 from sqlmodel import select
 
 from app.db import SessionDep
-from app.models import User, UserCreate, UserUpdate
+from app.models import User, UserCreate
 
 
 router = APIRouter(prefix="/users", tags=["Users"])
@@ -34,18 +34,8 @@ async def read_user(user_id: int, session: SessionDep):
 
 
 @router.patch("/{user_id}", response_model=User)
-async def update_user(user_id: int, updated: UserUpdate, session: SessionDep):
-    db_user = session.get(User, user_id)
-    if not db_user:
-        raise HTTPException(status_code=404, detail="User not found")
-
-    user_data = updated.model_dump(exclude_unset=True)
-    db_user.sqlmodel_update(user_data)
-
-    session.add(db_user)
-    session.commit()
-    session.refresh(db_user)
-    return db_user
+async def update_user(user_id: int, session: SessionDep):
+    raise HTTPException(status_code=400, detail="Unsupported")
 
 
 @router.delete("/{user_id}", response_model=User)

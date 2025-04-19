@@ -28,20 +28,15 @@ class ResourceUpdate(ResourceBase):
 
 
 class UserBase(SQLModel):
-    discord_id: int
+    discord_id: int | None = Field(default=None, primary_key=True)
 
 
 class User(UserBase, table=True):
-    id: int | None = Field(default=None, primary_key=True)
     created_at: datetime | None = Field(default_factory=datetime.utcnow)
 
 
 class UserCreate(UserBase):
     pass
-
-
-class UserUpdate(UserBase):
-    discord_id: str | None
 
 
 class ChatBase(SQLModel):
