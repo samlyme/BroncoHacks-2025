@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import httpx
 
 load_dotenv()
-BASE_URL = "https://" + (os.getenv("SERVICE_ROOT") or "lmao")
+BASE_URL = "http://" + (os.getenv("SERVICE_ROOT") or "lmao")
 
 # -------------------- Resources --------------------
 
