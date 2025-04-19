@@ -58,7 +58,7 @@ class MessageBase(SQLModel):
 
 
 class Message(MessageBase, table=True):
-    id: int = Field(primary_key=True)
+    id: int = Field(default=None, primary_key=True)
     created_at: datetime | None = Field(default_factory=datetime.utcnow)
 
 
