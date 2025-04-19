@@ -8,40 +8,33 @@ from rag.models import User, UserCreate, UserUpdate
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
-# Create user
-
-# Create user
-
 
 @router.post("/", response_model=User)
-def create_user(user: UserCreate, session: SessionDep):
-    session.add(user)
-    session.commit()
-    session.refresh(user)
-    return user
+async def create_user(user: UserCreate, session: SessionDep):
+    db_user = User.model_validate(user)
 
-# Read all users
+    session.add(db_user)
+    session.commit()
+    session.refresh(db_user)
+
+    return db_user
 
 
 @router.get("/", response_model=list[User])
-def read_users(session: SessionDep):
+async def read_users(session: SessionDep):
     return session.exec(select(User)).all()
-
-# Read one user by ID
 
 
 @router.get("/{user_id}", response_model=User)
-def read_user(user_id: int, session: SessionDep):
+async def read_user(user_id: int, session: SessionDep):
     user = session.get(User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
 
-# Update user
-
 
 @router.patch("/{user_id}", response_model=User)
-def update_user(user_id: int, updated: UserUpdate, session: SessionDep):
+async def update_user(user_id: int, updated: UserUpdate, session: SessionDep):
     db_user = session.get(User, user_id)
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -54,15 +47,13 @@ def update_user(user_id: int, updated: UserUpdate, session: SessionDep):
     session.refresh(db_user)
     return db_user
 
-# Delete user
 
-
-@router.delete("/{user_id}")
-def delete_user(user_id: int, session: SessionDep):
+@router.delete("/{user_id}", response_model=User)
+async def delete_user(user_id: int, session: SessionDep):
     user = session.get(User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
     session.delete(user)
     session.commit()
-    return {"ok": True}
+    return user

@@ -7,37 +7,24 @@ from pgvector.sqlalchemy import Vector
 class ResourceBase(SQLModel):
     name: str
     file_path: str
-    label: str | None = None
-    type: str | None = None
+    label: str
+    type: str
 
 
 class Resource(ResourceBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    upload_date: datetime | None = Field(default_factory=datetime.utcnow)
+    created_at: datetime | None = Field(default_factory=datetime.utcnow)
 
 
 class ResourceCreate(ResourceBase):
-    name: str
-    file_path: str
-    label: str | None = None
-    type: str | None = None
+    pass
 
 
-class ResourceUpdate(SQLModel):
-    name: str | None = None
-    file_path: str | None = None
-    label: str | None = None
-    type: str | None = None
-
-
-class Chunk(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    resource_id: int = Field(foreign_key="resource.id")  # FK to resource
-    chunk_text: str
-    embedding: Annotated[
-        list[float],
-        Field(sa_column=Column(Vector(1536)))  # Using pgvector for embeddings
-    ]
+class ResourceUpdate(ResourceBase):
+    name: str | None
+    file_path: str | None
+    label: str | None
+    type: str | None
 
 
 class UserBase(SQLModel):
