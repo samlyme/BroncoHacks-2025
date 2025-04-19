@@ -2,6 +2,7 @@ import os
 import interactions
 from interactions import Client, Intents, Permissions, listen, slash_command, SlashContext, OptionType, slash_default_member_permission, slash_option, Modal, ParagraphText, ShortText, User, Member, component_callback, modal_callback, ComponentContext, ComponentCommand, Button, ButtonStyle, integration_types, ModalContext
 from dotenv import load_dotenv
+import rag
 import services
 # Create a bot instance with the specified intents
 bot = Client(intents=Intents.GUILDS |
@@ -79,7 +80,8 @@ async def on_message_create_in_thread(event: interactions.api.events.discord.Mes
             "chat_id": str(message_channel),
             "content": str(message_content)
         })
-        await event.message.channel.send(f"Hello {message_user}, you said: {message_content}, in {message_channel}")
+
+        await event.message.channel.send(rag.talk(message_content))
 
 load_dotenv()
 bot.start(os.getenv("DISCORD_TOKEN"))
