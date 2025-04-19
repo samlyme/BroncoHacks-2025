@@ -28,8 +28,7 @@ class ResourceUpdate(ResourceBase):
 
 
 class UserBase(SQLModel):
-    discord_id: int | None = Field(
-        sa_column=Column(BigInteger(), primary_key=True))
+    discord_id: str = Field(primary_key=True)
 
 
 class User(UserBase, table=True):
@@ -41,8 +40,7 @@ class UserCreate(UserBase):
 
 
 class ChatBase(SQLModel):
-    thread_id: int | None = Field(
-        sa_column=Column(BigInteger(), primary_key=True))
+    thread_id: str = Field(primary_key=True)
 
 
 class Chat(ChatBase, table=True):
