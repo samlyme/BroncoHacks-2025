@@ -18,7 +18,7 @@ async def on_ready():
 @listen()
 async def on_member_join(event: interactions.api.events.discord.MemberAdd):
     print(f"{event.member.id} has joined")
-    await services.create_user({
+    services.create_user({
         "discord_id": event.member.id
     })
 
@@ -26,7 +26,7 @@ async def on_member_join(event: interactions.api.events.discord.MemberAdd):
 @listen()
 async def on_member_leave(event: interactions.api.events.discord.MemberRemove):
     print(f"{event.member.id} has left")
-    await services.delete_user(event.member.id)
+    services.delete_user(event.member.id)
 
 
 @slash_command(name="chat", description="Create a private thread with the bot")
@@ -49,7 +49,7 @@ async def create_private_thread(ctx: SlashContext, thread_name: str):
     # Notify the user privately
     await ctx.send(f"Private thread created: {thread.name}, {thread.id}", ephemeral=True)
 
-    await services.create_chat({
+    services.create_chat({
         "thread_id": thread.id
     })
 
