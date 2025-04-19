@@ -42,3 +42,15 @@ class UserCreate(UserBase):
 
 class UserUpdate(UserBase):
     discord_id: str | None
+
+
+class ChatBase(SQLModel):
+    thread_id: int | None = Field(default=None, primary_key=True)
+
+
+class Chat(ChatBase, table=True):
+    created_at: datetime | None = Field(default_factory=datetime.utcnow)
+
+
+class ChatCreate(ChatBase):
+    pass

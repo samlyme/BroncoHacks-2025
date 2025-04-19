@@ -44,7 +44,7 @@ async def create_private_thread(ctx: SlashContext, thread_name: str):
     await thread.add_member(ctx.author.id)
 
     # Notify the user privately
-    await ctx.send(f"Private thread created: {thread.name}", ephemeral=True)
+    await ctx.send(f"Private thread created: {thread.name}, {thread.id}", ephemeral=True)
 
 
 @listen()
