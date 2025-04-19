@@ -54,11 +54,11 @@ class ChatCreate(ChatBase):
 class MessageBase(SQLModel):
     user_id: str = Field(foreign_key="user.discord_id")
     chat_id: str = Field(default=None, foreign_key="chat.thread_id")
-    message_id: str = Field(default=None, primary_key=True)
     content: str
 
 
 class Message(MessageBase, table=True):
+    id: str = Field(default=None, primary_key=True)
     created_at: datetime | None = Field(default_factory=datetime.utcnow)
 
 
